@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MEDIQUEUE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-analytics.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAREKZ5z9gMcIm9j5DIC54JuGFcfVNIF0I",
+            authDomain: "mediqueue-14b0d.firebaseapp.com",
+            projectId: "mediqueue-14b0d",
+            storageBucket: "mediqueue-14b0d.firebasestorage.app",
+            messagingSenderId: "714545660145",
+            appId: "1:714545660145:web:b4368186330d7f8dd92950",
+            measurementId: "G-6X6H6M4W51"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+    <style>
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, var(--bg-color), #1a1a2e); }
+        .login-container { width: 100%; max-width: 450px; padding: 2rem; }
+        .login-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .login-tab { flex: 1; padding: 0.7rem; border-radius: 10px; border: 1px solid var(--panel-border); background: rgba(255,255,255,0.03); color: var(--text-muted); cursor: pointer; text-align: center; font-size: 0.9rem; font-family: 'Poppins', sans-serif; }
+        .login-tab.active { background: var(--gradient-btn); color: #fff; border-color: transparent; }
+        .error-msg { color: var(--danger-color); font-size: 0.85rem; margin-top: 0.5rem; display: none; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="glass-panel" style="animation: none;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fa-solid fa-right-to-bracket" style="font-size: 2.5rem; background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                <h2 style="font-size: 1.8rem; margin-top: 0.5rem;">Access Portal</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Login to view your dashboard</p>
+            </div>
+
+            <div class="login-tabs">
+                <button class="login-tab active" data-role="patient"><i class="fa-solid fa-user"></i> Patient</button>
+                <button class="login-tab" data-role="doctor"><i class="fa-solid fa-user-doctor"></i> Doctor</button>
+                <button class="login-tab" data-role="admin"><i class="fa-solid fa-shield-halved"></i> Admin</button>
+            </div>
+
+            <form id="login-form">
+                <input type="hidden" id="selected-role" value="patient">
+                <div class="form-group">
+                    <label for="email"><i class="fa-regular fa-envelope"></i> Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <p id="login-error" class="error-msg"><i class="fa-solid fa-circle-exclamation"></i> <span id="error-text">Invalid credentials</span></p>
+                <button type="submit" id="login-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    Secure Login <i class="fa-solid fa-lock"></i>
+                </button>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Don't have an account? <a href="register.html" style="color: var(--accent-color);">Register here</a></p>
+                    <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem;"><i class="fa-solid fa-arrow-left"></i> Return to Homepage</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

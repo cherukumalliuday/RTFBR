@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | MEDIQUEUE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-analytics.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAREKZ5z9gMcIm9j5DIC54JuGFcfVNIF0I",
+            authDomain: "mediqueue-14b0d.firebaseapp.com",
+            projectId: "mediqueue-14b0d",
+            storageBucket: "mediqueue-14b0d.firebasestorage.app",
+            messagingSenderId: "714545660145",
+            appId: "1:714545660145:web:b4368186330d7f8dd92950",
+            measurementId: "G-6X6H6M4W51"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h2><span class="text-gradient">MEDI</span>QUEUE</h2>
+            </div>
+            <div style="flex: 1;">
+                <div data-tab-target="tab1" class="nav-link"><i class="fa-solid fa-server"></i> System Diagnostics</div>
+                <div data-tab-target="tab2" class="nav-link"><i class="fa-solid fa-user-doctor"></i> Roster & Staff</div>
+                <div data-tab-target="tab3" class="nav-link"><i class="fa-solid fa-chart-column"></i> Appointments</div>
+                <div data-tab-target="tab4" class="nav-link"><i class="fa-solid fa-triangle-exclamation"></i> Live Queue</div>
+            </div>
+            <div class="sidebar-footer">
+                <button id="btn-logout" class="btn btn-secondary btn-logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </button>
+                <div id="logout-modal" class="logout-modal">
+                    <div class="glass-panel logout-content" style="background: var(--bg-color);">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <h2>End Session</h2>
+                        <div class="logout-actions">
+                            <button id="cancel-logout" class="btn btn-secondary">Cancel</button>
+                            <button id="confirm-logout" class="btn btn-danger">Confirm Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="top-header">
+                <div>
+                    <h1 style="font-size: 1.8rem; margin-bottom: 0.2rem;">Super Administrator</h1>
+                    <p style="color: var(--text-muted);">Root System Access • Time: <span id="sys-time">Loading...</span></p>
+                </div>
+                <div class="user-profile">
+                    <span id="user-name-display">Admin</span>
+                    <div class="avatar" id="user-avatar" style="background: linear-gradient(135deg, #8a2be2, #ff00ff);">A</div>
+                </div>
+            </div>
+
+            <!-- TAB 1: SYSTEM DIAGNOSTICS -->
+            <div id="tab1" class="tab-content">
+                <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem;">
+                    <div class="glass-panel stat-card" style="padding: 1.5rem; text-align: left;">
+                        <div class="stat-label">Total Patients</div>
+                        <div id="stat-total-patients" class="stat-value" style="font-size: 2rem; margin: 0.5rem 0;">-</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Registered users</p>
+                    </div>
+                    <div class="glass-panel stat-card" style="padding: 1.5rem; text-align: left;">
+                        <div class="stat-label">Total Doctors</div>
+                        <div id="stat-total-doctors" class="stat-value" style="font-size: 2rem; margin: 0.5rem 0; color: var(--success-color); background: none; -webkit-text-fill-color: var(--success-color);">-</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">On staff</p>
+                    </div>
+                    <div class="glass-panel stat-card" style="padding: 1.5rem; text-align: left; border-color: var(--accent-color);">
+                        <div class="stat-label" style="color: var(--accent-color);">Today's Appointments</div>
+                        <div id="stat-today-appointments" class="stat-value" style="font-size: 2rem; margin: 0.5rem 0; color: var(--accent-color); background: none; -webkit-text-fill-color: var(--accent-color);">-</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Scheduled today</p>
+                    </div>
+                    <div class="glass-panel stat-card" style="padding: 1.5rem; text-align: left; border-color: rgba(255, 193, 7, 0.4);">
+                        <div class="stat-label" style="color: var(--warning-color);">Active Queue</div>
+                        <div id="stat-active-queue" class="stat-value" style="font-size: 2rem; margin: 0.5rem 0; color: var(--warning-color); background: none; -webkit-text-fill-color: var(--warning-color);">-</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Patients waiting</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2 class="section-title" style="margin-bottom: 2rem;"><i class="fa-solid fa-chart-simple"></i> System Overview</h2>
+                    <div class="dashboard-grid col-2">
+                        <div>
+                            <h3 style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">Patients Per Day (This Week)</h3>
+                            <div id="week-chart" style="display: flex; align-items: flex-end; gap: 0.5rem; height: 150px; padding-bottom: 0.5rem; border-bottom: 1px solid var(--panel-border);">
+                            </div>
+                            <div id="week-labels" style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;"></div>
+                        </div>
+                        <div class="glass-panel" style="background: rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 1rem;">
+                            <h3 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">Quick Actions</h3>
+                            <button class="btn btn-secondary" onclick="showToast('Generating system report...')"><i class="fa-solid fa-file-export"></i> Export Report</button>
+                            <button class="btn btn-secondary" onclick="adminLoadStats()"><i class="fa-solid fa-rotate"></i> Refresh Stats</button>
+                            <button class="btn btn-secondary" style="color: var(--warning-color);" onclick="showToast('Maintenance mode toggled.')"><i class="fa-solid fa-wrench"></i> Toggle Maintenance</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: STAFF & DOCTORS ROSTER -->
+            <div id="tab2" class="tab-content">
+                <div class="glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 class="section-title" style="margin: 0; border: none;"><i class="fa-solid fa-address-book"></i> Doctor Roster</h2>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="window.location.href='register.html'">
+                            <i class="fa-solid fa-user-plus"></i> Onboard Staff
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+                        <div class="form-group" style="margin: 0; width: 300px;">
+                            <input type="text" id="search-doctor" class="form-control" placeholder="Search by Name...">
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table id="doctor-roster-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Department</th>
+                                    <th>Specialization</th>
+                                    <th>Experience</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="doctor-roster-body">
+                                <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: APPOINTMENTS -->
+            <div id="tab3" class="tab-content">
+                <div class="glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 class="section-title" style="margin: 0; border: none;"><i class="fa-solid fa-calendar-days"></i> All Appointments</h2>
+                        <div style="display: flex; gap: 1rem;">
+                            <input type="date" id="admin-apt-date" class="form-control" style="width: 180px; padding: 0.5rem;">
+                            <select id="admin-apt-status" class="form-control" style="width: 150px; padding: 0.5rem;">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Department</th>
+                                <th>Date & Time</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-appointments-body">
+                            <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: LIVE QUEUE -->
+            <div id="tab4" class="tab-content">
+                <div class="glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 class="section-title" style="margin: 0; border: none;"><i class="fa-solid fa-tower-broadcast"></i> Live Queue Monitor</h2>
+                        <button class="btn btn-secondary" onclick="adminLoadQueue()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Check-in</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-queue-body">
+                            <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

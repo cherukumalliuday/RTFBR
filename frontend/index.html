@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDIQUEUE | Smart Hospital Appointments</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-analytics.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAREKZ5z9gMcIm9j5DIC54JuGFcfVNIF0I",
+            authDomain: "mediqueue-14b0d.firebaseapp.com",
+            projectId: "mediqueue-14b0d",
+            storageBucket: "mediqueue-14b0d.firebasestorage.app",
+            messagingSenderId: "714545660145",
+            appId: "1:714545660145:web:b4368186330d7f8dd92950",
+            measurementId: "G-6X6H6M4W51"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 1.5rem; font-weight: bold;">
+            <i class="fa-solid fa-heart-pulse" style="color: var(--accent-color);"></i>
+            <span><span class="text-gradient">MEDI</span>QUEUE</span>
+        </div>
+        <ul class="nav-links-site">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#doctors">Doctors</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <a href="login.html" class="btn btn-secondary"><i class="fa-solid fa-right-to-bracket"></i> Login / Book</a>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>The Future of <br><span class="text-gradient">Hospital Care</span> is Here.</h1>
+            <p>Experience seamless appointment booking, live queue updates, and intelligent doctor scheduling. Say goodbye to crowded waiting rooms and hello to efficiency.</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <a href="login.html" class="btn btn-primary">Book Appointment</a>
+                <a href="login.html" class="btn btn-secondary">Login</a>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <div class="glass-panel" style="width: 100%; aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(0,0,0,0) 70%); border: 1px solid rgba(0, 240, 255, 0.2);">
+                <i class="fa-solid fa-hospital" style="font-size: 8rem; color: var(--accent-color); opacity: 0.8;"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background: rgba(0,0,0,0.2);">
+        <h2 class="section-heading">About <span class="text-gradient">MEDIQUEUE</span></h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+            <p>At MEDIQUEUE, we believe that obtaining healthcare should be as painless as possible. Founded with a mission to revolutionize hospital queue management, our platform drastically reduces wait times by providing live queue indicators, robust scheduling platforms, and comprehensive management dashboards for healthcare professionals.</p>
+            <br>
+            <p>Our commitment lies in bridging the gap between patient satisfaction and operational efficiency, empowering both doctors and administrators with cutting-edge digital infrastructure.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-heading">Our <span class="text-gradient">Services</span></h2>
+        <div class="grid-cards">
+            <div class="glass-panel spec-card">
+                <i class="fa-solid fa-laptop-medical"></i>
+                <h3>Online Booking</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Book appointments instantly from anywhere, anytime without waiting on hold.</p>
+            </div>
+            <div class="glass-panel spec-card">
+                <i class="fa-solid fa-stopwatch"></i>
+                <h3>Real-Time Queue</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Track your position in the line live. Know exactly when it's your turn to see the doctor.</p>
+            </div>
+            <div class="glass-panel spec-card">
+                <i class="fa-solid fa-truck-medical"></i>
+                <h3>Emergency Priority</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Automated priority handling for emergencies ensures acute cases are seen immediately.</p>
+            </div>
+            <div class="glass-panel spec-card">
+                <i class="fa-solid fa-file-medical"></i>
+                <h3>Digital Records</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Access all your lab results, prescriptions, and past visits in your secure portal.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors">
+        <h2 class="section-heading">Medical <span class="text-gradient">Specialties</span></h2>
+        <div class="grid-cards">
+            <div class="glass-panel spec-card"><i class="fa-solid fa-heart-pulse"></i><h3>Cardiology</h3><p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Advanced heart care, regular checkups, and complex surgeries led by world-class specialists.</p></div>
+            <div class="glass-panel spec-card"><i class="fa-solid fa-brain"></i><h3>Neurology</h3><p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Comprehensive care for brain and nervous system disorders utilizing state-of-the-art tech.</p></div>
+            <div class="glass-panel spec-card"><i class="fa-solid fa-bone"></i><h3>Orthopedics</h3><p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">From sports injuries to joint replacements, our dedicated team gets you moving again.</p></div>
+            <div class="glass-panel spec-card"><i class="fa-solid fa-x-ray"></i><h3>Radiology</h3><p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Precise diagnostics powered by the latest imaging technologies available 24/7.</p></div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: rgba(0,0,0,0.2);">
+        <div class="contact-layout">
+            <div class="contact-info">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Get in <span class="text-gradient">Touch</span></h2>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Have questions about our queue system or want to enroll your hospital? Reach out to our dedicated support team today.</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div><h4 style="margin-bottom: 0.2rem;">Our Location</h4><p style="color: var(--text-muted); font-size: 0.9rem;">123 Innovation Drive, Tech City, TX 75001</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div><h4 style="margin-bottom: 0.2rem;">Call Us 24/7</h4><p style="color: var(--text-muted); font-size: 0.9rem;">+1 (555) 123-4567</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div><h4 style="margin-bottom: 0.2rem;">Email Us</h4><p style="color: var(--text-muted); font-size: 0.9rem;">support@mediqueue.tech</p></div>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Send a Message</h3>
+                <form>
+                    <div class="form-group"><label>Full Name</label><input type="text" class="form-control" placeholder="John Doe"></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" class="form-control" placeholder="john@example.com"></div>
+                    <div class="form-group"><label>Your Message</label><textarea class="form-control" rows="4" placeholder="How can we help you?" style="resize: vertical;"></textarea></div>
+                    <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showToast('Message sent! We will get back to you shortly.')">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--panel-border); font-size: 0.9rem; color: var(--text-muted);">
+        <p>&copy; 2026 MEDIQUEUE. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
